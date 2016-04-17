@@ -1,12 +1,11 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('IssueTruck', [
   'ngRoute',
-  'myApp.view1',
+  'IssueTruck.home',
   'myApp.view2',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/'});
 }]);
