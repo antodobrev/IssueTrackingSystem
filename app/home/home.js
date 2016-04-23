@@ -15,19 +15,31 @@ angular.module(
 
     .controller('HomeController', [
         '$scope',
+        '$location',
         'authentication',
-        function ($scope, authentication) {
+        function ($scope, $location, authentication) {
 
             $scope.login = function (userData) {
                 authentication.loginUser(userData)
                     .then(function (response) {
                         console.log(response);
+                        $location.path('/dashboard');
                     }, function (error) {
                         console.log(error);
                     })
             };
 
-            $scope.register = function (username) {
-                console.log(username);
+            $scope.register = function (regUserData) {
+                authentication.registerUser(regUserData)
+                    .then(function (response) {
+                        console.log(response);
+                        var userData = {};
+                        userData.Password = regUserData.Password;
+                        userData.Username = regUserData.Email;
+                        console.log(userData);
+                        authentication.loginUser(userData)
+                    }, function (error) {
+                        console.log(error);
+                    })
             }
         }]);
