@@ -16,7 +16,7 @@ angular.module('IssueTruck.users.authentication', [])
                     + '&email=' + regUserData.Username
                     + '&password=' + regUserData.Password;
 
-                $http.post(BASE_URL + 'Account/Register', data, config)
+                $http.post(BASE_URL + 'api/Account/Register', data, config)
                     .then(function(response) {
                         deferred.resolve(response.data);
                     }, function(error) {
@@ -52,7 +52,7 @@ angular.module('IssueTruck.users.authentication', [])
                     + '&password='
                     + userData.Password;
 
-                $http.post(BASE_URL + 'Token', data, config)
+                $http.post(BASE_URL + 'api/Token', data, config)
                     .then(function(response) {
                         sessionStorage.User = response.data.userName;
                         sessionStorage.token = response.data.access_token;
