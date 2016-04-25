@@ -14,7 +14,18 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
         'projectsGetter',
         function($scope, projectsGetter) {
             projectsGetter.getProjects().then(function (projectsData) {
-                console.log(projectsData.data.Projects);
                 $scope.projects = projectsData.data.Projects;
+                $scope.projects.forEach(function (el) {
+                    projectsGetter.getProjectIssues(el.Id).then(function (issues) {
+                        console.log(issues.data);
+                    })
+                })
             });
+            
+
+            $scope.triggerGetProject = function(id) {
+                projectsGetter.getProjectById(id).then(function (projectData) {
+                    console.log(projectData);
+                })
+            }
     }]);

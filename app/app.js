@@ -7,6 +7,7 @@ angular.module('IssueTruck', [
         'IssueTruck.users.authentication',
         'IssueTruck.dashboard',
         'IssueTruck.projects',
+        'IssueTruck.issues',
         'myApp.version'
     ])
     .config(['$routeProvider', function ($routeProvider) {
