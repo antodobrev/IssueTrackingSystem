@@ -1,7 +1,7 @@
 <h4 class="bg-info">Projects</h4>
 <ul ng-model="projects" >
     <li ng-repeat="project in projects">{{project.Name}}
-        <a data-id="{{project.Id}}"  ng-click="triggerGetProject(project.Id)" type="button" class="btn btn-info">
+        <a href="#/project/{{project.Id}}" data-id="{{project.Id}}"  ng-click="triggerGetProject(project.Id)" type="button" class="btn btn-info">
             view
         </a>
     </li>
