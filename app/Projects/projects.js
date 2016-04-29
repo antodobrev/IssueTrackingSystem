@@ -21,6 +21,22 @@ angular.module('IssueTruck.projects.getter', [])
                 return defered.promise;
             }
 
+            function getProjectsByLeaderId(leaderId) {
+                var defered = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                $http.get(BASE_URL + 'projects?filter=Lead.Id="' + leaderId
+                    + '"&pageSize=4&pageNumber=1'
+                ).then(function (response) {
+                    defered.resolve(response);
+                }, function (err) {
+                    console.log(err);
+                });
+
+                return defered.promise;
+            }
+
             function getProjects() {
                 var defered = $q.defer();
 
@@ -51,8 +67,9 @@ angular.module('IssueTruck.projects.getter', [])
 
             return {
                 getProjects: getProjects,
-                getProjectById:getProjectById,
-                getProjectIssues: getProjectIssues
+                getProjectById: getProjectById,
+                getProjectIssues: getProjectIssues,
+                getProjectsByLeaderId: getProjectsByLeaderId
             }
         }
     ]);

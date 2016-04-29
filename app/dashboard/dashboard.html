@@ -1,7 +1,19 @@
-<h2>Dashboard</h2>
-<h2>Affiliated projects</h2>
-
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<h4>Dashboard</h4>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="row">
+        <strong>my projects</strong>
+      </div>
+      <div ng-include="'projects/partials/tabsOfProjects.html'" class="row"></div>
+    </div>
+    <!-- col 2 -->
+    <div class="col-md-5">
+      <div class="row">
+        <strong> assigned to me:</strong>
+      </div>
+      <div ng-include="'projects/partials/tableOfIssues.html'" class="col-md-12">
+      </div>
+    </div>
+  </div>
+</div>

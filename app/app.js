@@ -13,8 +13,12 @@ angular.module('IssueTruck', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
     }])
-    .run(function () {
-
+    .run(function ($rootScope, $location, authentication) {
+        $rootScope.$on('$locationChangeStart', function (event) {
+            if (!authentication.isLoggedIn()) {
+                $location.path("/");
+            }
+        })
     })
     .constant('BASE_URL', "http://softuni-issue-tracker.azurewebsites.net/");
 

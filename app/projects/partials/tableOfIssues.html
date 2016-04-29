@@ -1,0 +1,18 @@
+<table class=" col-md-12 table table-hover">
+    <thead>
+    <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>due date</th>
+        <th>assignee</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="issue in project.Issues">
+        <td>{{issue.Title}}</td>
+        <td>{{issue.Description}}</td>
+        <td>{{issue.DueDate}}</td>
+        <td>{{issue.Assignee.Username}}</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+<div id="project-tabs">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#all" aria-controls="all" role="tab"
+               data-toggle="tab">all projects</a>
+        </li>
+        <li role="presentation">
+            <a href="#lead" aria-controls="lead" role="lead" data-toggle="tab">projects as lead</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="all">
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="lead">
+            <ul>
+                <li ng-repeat="project in projectsAsLead">{{project.Name}}</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+    $('#project-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show')
+    })
+</script>

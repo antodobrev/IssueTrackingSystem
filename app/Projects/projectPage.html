@@ -48,27 +48,8 @@
                 <h4 class="text-center col-md-12"><strong>issues</strong></h4>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <table class=" col-md-12 table table-hover">
-                        <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>description</th>
-                            <th>due date</th>
-                            <th>assignee</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="issue in project.Issues">
-                                <td>{{issue.Title}}</td>
-                                <td>{{issue.Description}}</td>
-                                <td>{{issue.DueDate}}</td>
-                                <td>{{issue.Assignee.Username}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div ng-include="'projects/partials/tableOfIssues.html'" class="col-md-12">
                 </div>
-
             </div>
         </div>
     </div>

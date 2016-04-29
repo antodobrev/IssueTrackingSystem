@@ -74,9 +74,14 @@ angular.module('IssueTruck.users.authentication', [])
 
             }
 
+            function isLoggedIn() {
+                return sessionStorage['User'];
+            }
+
             return {
                 registerUser: registerUser,
                 loginUser: loginUser,
-                logout: logout
+                logout: logout,
+                isLoggedIn: isLoggedIn
             }
         }]);
