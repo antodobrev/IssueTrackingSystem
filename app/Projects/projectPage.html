@@ -1,2 +1,75 @@
-<h2>Project: {{project.Name}}</h2>
-<p>{{project.ProjectKey}}</p>
+<div class="container-fluid">
+    <div ng-include="'Projects/partials/projectHeader.html'" class="row"></div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <h4 class="text-center col-md-12"><strong>project data</strong></h4>
+            </div>
+            <div class="row">
+                <strong class="col-md-4 text-right">project lead:</strong>
+                <div class="col-md-8 text-left">{{project.Lead.Username}}</div>
+            </div>
+            <div class="row">
+                <strong class="col-md-4 text-right">project key:</strong>
+                <em class="col-md-8">{{project.ProjectKey}}</em>
+            </div>
+            <div class="row">
+                <strong class="col-md-4 text-right">labels:</strong>
+                <div class="col-md-8">
+                    <ul class="list-inline">
+                        <li class="project-priority text-left" ng-repeat="label in project.Labels">{{label.Name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <strong class="col-md-4 text-right">priorities:</strong>
+                <div class="col-md-8">
+                    <ul class="list-inline">
+                        <li class="project-priority text-left" ng-repeat="priority in project.Priorities">
+                            {{priority.Name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <strong class="col-md-4 text-right">description:</strong>
+                <div class="col-md-8 text-left">{{project.Description}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8 text-right">
+                    <a href="#/project/{{project.Id}}/edit" type="button" class="btn btn-default">edit project</a>
+                    <a href="#/project/{{project.Id}}/add-issue" type="button" class="btn btn-info">add issue</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h4 class="text-center col-md-12"><strong>issues</strong></h4>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class=" col-md-12 table table-hover">
+                        <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>description</th>
+                            <th>due date</th>
+                            <th>assignee</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="issue in project.Issues">
+                                <td>{{issue.Title}}</td>
+                                <td>{{issue.Description}}</td>
+                                <td>{{issue.DueDate}}</td>
+                                <td>{{issue.Assignee.Username}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

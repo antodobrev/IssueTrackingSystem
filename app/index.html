@@ -20,25 +20,26 @@
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-<ul class="nav navbar-nav navbar-right scroll">
-    <li class="active"><a href="#works">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#contact">Contact</a></li>
-</ul>
-<ul class="menu">
-    <li><a href="#/dashboard" type="button" class="btn btn-success">Dashboard</a></li>
-    <li><a href="#/projects" type="button" class="btn btn-success" >Projects</a></li>
-</ul>
+<div class="row header">
+    <ul class="nav navbar-nav navbar-left scroll">
+        <li class="active"><a href="#/dashboard">Dashboard</a></li>
+        <li><a href="#/projects">Projects</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</div>
+<div class="main-container">
 
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<div ng-view></div>
+    <div ng-view></div>
 
-<div>Angular seed app: v<span app-version></span></div>
+    <div>Angular seed app: v<span app-version></span></div>
+</div>
+
 
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
