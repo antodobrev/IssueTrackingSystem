@@ -5,6 +5,7 @@ angular.module('IssueTruck', [
         'ngCookies',
         'IssueTruck.home',
         'IssueTruck.users.authentication',
+        'IssueTruck.users.userController',
         'IssueTruck.dashboard',
         'IssueTruck.projects',
         'IssueTruck.issues',

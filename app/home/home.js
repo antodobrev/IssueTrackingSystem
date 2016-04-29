@@ -15,14 +15,15 @@ angular.module(
 
     .controller('HomeController', [
         '$scope',
+        '$rootScope',
         '$location',
         'authentication',
-        function ($scope, $location, authentication) {
+        function ($scope, $rootScope, $location, authentication) {
 
             $scope.login = function (userData) {
                 authentication.loginUser(userData)
                     .then(function (response) {
-                        console.log(response);
+                        $rootScope.user = response.userName;
                         $location.path('/dashboard');
                     }, function (error) {
                         console.log(error);
@@ -41,5 +42,11 @@ angular.module(
                     }, function (error) {
                         console.log(error);
                     })
+            };
+
+            $rootScope.logout = function () {
+                authentication.logout();
+                $rootScope.user = undefined;
+                $location.path('/');
             }
         }]);

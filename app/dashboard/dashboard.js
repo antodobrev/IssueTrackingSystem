@@ -14,8 +14,9 @@ angular.module('IssueTruck.dashboard', ['ngRoute'])
         'issueService',
         'projectsGetter',
         function ($scope, issueService, projectsGetter) {
-            issueService.getMyIssues().then(function (response) {
-                console.log(response.data);
+            issueService.getMyIssues().then(function (issues) {
+                console.log(issues.data);
+                $scope.Issues = issues.data.Issues;
             });
             var leaderId = sessionStorage.userId;
             projectsGetter.getProjectsByLeaderId(leaderId).then(function (response) {

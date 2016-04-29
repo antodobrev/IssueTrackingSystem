@@ -57,6 +57,7 @@ angular.module('IssueTruck.users.authentication', [])
                         sessionStorage.User = response.data.userName;
                         sessionStorage.token = response.data.access_token;
                         var loggedUserData = {};
+                        deferred.resolve(response.data);
                         getLoggedInUser(response.data).then(function (logedInResponse) {
                             loggedUserData = logedInResponse.data;
                             sessionStorage.userId = loggedUserData.Id;
@@ -71,7 +72,7 @@ angular.module('IssueTruck.users.authentication', [])
             }
 
             function logout() {
-
+                sessionStorage.clear();
             }
 
             function isLoggedIn() {

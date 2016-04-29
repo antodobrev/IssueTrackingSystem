@@ -58,7 +58,7 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                 $scope.project = projectData.data;
                 projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
                     console.log(issues.data);
-                    $scope.project.Issues = issues.data;
+                    $scope.Issues = issues.data;
                 })
             })
         }
