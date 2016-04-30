@@ -65,11 +65,16 @@ angular.module('IssueTruck.projects.getter', [])
                 return defered.promise;
             }
 
+            function addProject(projectData) {
+                
+            }
+
             return {
                 getProjects: getProjects,
                 getProjectById: getProjectById,
                 getProjectIssues: getProjectIssues,
-                getProjectsByLeaderId: getProjectsByLeaderId
+                getProjectsByLeaderId: getProjectsByLeaderId,
+                addProject: addProject
             }
         }
     ]);

@@ -1,2 +1,6 @@
 <p>{{user}}</p>
-<button class="btn btn-default" type="button">cbahge passoword</button>
+<a href="#/profile/password" class="btn btn-default" type="button">cbahge passoword</a>
+
+<div ng-if="isAdmin" class="admin">
+    <a href="#/projects/add" type="button" class="btn btn-info">add project</a>
+</div>

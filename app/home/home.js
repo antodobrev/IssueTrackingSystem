@@ -18,15 +18,18 @@ angular.module(
         '$rootScope',
         '$location',
         'authentication',
-        function ($scope, $rootScope, $location, authentication) {
+        'notifyService',
+        function ($scope, $rootScope, $location, authentication, notifyService) {
 
             $scope.login = function (userData) {
                 authentication.loginUser(userData)
                     .then(function (response) {
                         $rootScope.user = response.userName;
+                        notifyService.waveMessage('successfully logged in', 'success');
                         $location.path('/dashboard');
                     }, function (error) {
-                        console.log(error);
+                        console.log(error.data);
+                        notifyService.showError('login error', error.data)
                     })
             };
 
@@ -40,7 +43,8 @@ angular.module(
                         console.log(userData);
                         authentication.loginUser(userData)
                     }, function (error) {
-                        console.log(error);
+                        console.log(error.data);
+                        notifyService.showError('register error', error.data)
                     })
             };
 

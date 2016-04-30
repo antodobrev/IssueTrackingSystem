@@ -4,10 +4,13 @@ angular.module('IssueTruck', [
         'ngRoute',
         'ngCookies',
         'IssueTruck.home',
+        'IssueTruck.notyService',
         'IssueTruck.users.authentication',
         'IssueTruck.users.userController',
+        'IssueTruck.users.passwordController',
         'IssueTruck.dashboard',
         'IssueTruck.projects',
+        'IssueTruck.projects.AddProjectController',
         'IssueTruck.issues',
         'myApp.version'
     ])
