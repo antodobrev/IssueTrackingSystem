@@ -1,65 +1,83 @@
 <div class="container-fluid">
-    <div class="col-md-5">
+    <div class="col-md-8">
         <div class="row">
             <h4 class="text-center col-md-12"><strong>new project</strong></h4>
         </div>
+        <div class="row">
+            <strong class="col-md-2 text-right">project lead:</strong>
+            <div class="col-md-6 text-left">
+                <input id="leadUsername" type="text" ng-model="project.leadId" placeholder="Lead username"
+                       uib-typeahead="user.Id as user.Username for user in users | filter:$viewValue | limitTo:8"
+                       typeahead-loading="loadingUsers" typeahead-no-results="noResults"
+                       typeahead-input-formatter="formatLead($model)"
+                       class="form-control" required="required">
 
-        <input id="leadUsername" type="text" ng-model="project.leadId" placeholder="Lead username"
-               uib-typeahead="user.Id as user.Username for user in users | filter:$viewValue | limitTo:8"
-               typeahead-loading="loadingUsers" typeahead-no-results="noResults"
-               typeahead-input-formatter="formatLead($model)"
-               class="form-control" required="required">
+                <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults">
+                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                </div>
+                <div>{{project.leadId}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <strong class="col-md-2 text-right">project title:</strong>
+            <div class="col-md-6 text-left">
+                <input ng-model="project.Name" ng-change="generateKey(project.Name)"
+                       class="form-control" type="text" placeholder="name of the project">
+            </div>
+        </div>
+        <div class="row">
+            <strong class="col-md-2 text-right">project key:</strong>
+            <em class="col-md-6">{{project.ProjectKey}}</em>
+        </div>
+        <div class="row">
+            <strong class="col-md-2 text-right">labels:</strong>
+        </div>
+        <div ng-repeat="lb in numberOfLabels track by $index" class="row">
+            <strong class="col-md-2 text-right">label {{$index + 1}}:</strong>
 
-        <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
-        <div ng-show="noResults">
-            <i class="glyphicon glyphicon-remove"></i> No Results Found
-        </div>
-        <div>{{project.leadId}}</div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project lead:</strong>
-            <div class="col-md-8 text-left">
-                <em class="col-md-8">{{user}}</em>
-                <select name="user" id="userId" class="form-control">
-                    <option ng-repeat="user in allUsers"{{user.Username}} value=""></option>
-                </select>
+            <div class="col-md-6 text-left">
+                <input data-role="tagsinput" id="labels" type="text" ng-model="project.labels[$index]"
+                       placeholder="label"
+                       uib-typeahead="label.Name as label.Name for label in labels | filter:$viewValue | limitTo:8"
+                       ng-change="loadingLabels(project.labels[$index])" typeahead-no-results="noResults"
+                       typeahead-input-formatter="formatLabel($model)"
+                       class="form-control" required="required">
+
+                <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults">
+                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project title:</strong>
-            <div class="col-md-8 text-left">
-                <input ng-model="projectData.Name" ng-change="generateKey(projectData.Name)"
-                       class="form-control" type="text" placeholder="name of the project" >
+            <div class="col-md-2">
+                <span>{{project.labels[$index]}}</span>
             </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project key:</strong>
-            <em class="col-md-8">{{projectData.ProjectKey}}</em>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">labels:</strong>
-            <div class="col-md-8">
-                <input type="text" class="form-control"
-                       placeholder="comma separated labels">
+            <div class="col-md-2">
+                <span ng-click="increaseLabels()" class="glyphicon glyphicon-plus-sign"></span>
             </div>
+
         </div>
         <div class="row">
-            <strong class="col-md-4 text-right">priorities:</strong>
-            <div class="col-md-8">
-                <input type="text" class="form-control"
+            <strong class="col-md-2 text-right">priorities:</strong>
+            <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="project.priorities"
                        placeholder="comma separated priorities">
             </div>
+            <div class="col-md-2">
+                <span>{{project.priorities}}</span>
+            </div>
         </div>
         <div class="row">
-            <strong class="col-md-4 text-right">description:</strong>
-            <div class="col-md-8 text-left">
-                <textarea class="form-control" name="description" id=""
+            <strong class="col-md-2 text-right">description:</strong>
+            <div class="col-md-6 text-left">
+                <textarea ng-model="project.Description" class="form-control" name="description" id=""
                           cols="30" rows="10">{{project.Description}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-8 text-right">
-                <button type="button" ng-click="addNewProject(projectData)" class="btn btn-success">save</button>
+                <button type="button" ng-click="addNewProject(project)" class="btn btn-success">save</button>
                 <a href="#/project/{{project.Id}}">cancel</a>
             </div>
         </div>
