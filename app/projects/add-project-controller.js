@@ -12,7 +12,8 @@ angular.module('IssueTruck.projects.AddProjectController', ['ngRoute', 'IssueTru
     .controller('AddProjectController', [
         '$scope',
         'projectsGetter',
-        function ($scope, projectsGetter) {
+        'authentication',
+        function ($scope, projectsGetter, authentication) {
 
             $scope.generateKey = function (name) {
                 var key = [];
@@ -20,7 +21,27 @@ angular.module('IssueTruck.projects.AddProjectController', ['ngRoute', 'IssueTru
                     key.push(el[0])
                 });
                 $scope.projectData.ProjectKey = key.join('');
-            }
+            };
+
+            $scope.loadingUsers = authentication.getAllUsers()
+                .then(function (response) {
+                    $scope.users = response.data;
+                    $scope.formatLead = function (model) {
+                        debugger;
+                        for (var i = 0; i < $scope.users.length; i++) {
+                            if (model === $scope.users[i].Id) {
+                                return $scope.users[i].Username;
+                            }
+                        }
+                    };
+                }, function (error) {
+                    console.log(error);
+                });
+
+           // authentication.getAllUsers().then(function (response) {
+           //     $scope.allUsers = response.data;
+           //     console.log($scope.allUsers);
+           // });
 
             $scope.addNewProject = function (projectData) {
                 var collectedProjectData = projectData;

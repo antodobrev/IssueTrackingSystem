@@ -12,7 +12,8 @@ angular.module('IssueTruck', [
         'IssueTruck.projects',
         'IssueTruck.projects.AddProjectController',
         'IssueTruck.issues',
-        'myApp.version'
+        'myApp.version',
+        'ui.bootstrap'
     ])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});

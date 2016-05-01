@@ -1,9 +1,28 @@
 <div class="container-fluid">
-    <div ng-include="'Projects/partials/projectHeader.html'" class="row"></div>
-    <p>add</p>
     <div class="col-md-5">
         <div class="row">
             <h4 class="text-center col-md-12"><strong>new project</strong></h4>
+        </div>
+
+        <input id="leadUsername" type="text" ng-model="project.leadId" placeholder="Lead username"
+               uib-typeahead="user.Id as user.Username for user in users | filter:$viewValue | limitTo:8"
+               typeahead-loading="loadingUsers" typeahead-no-results="noResults"
+               typeahead-input-formatter="formatLead($model)"
+               class="form-control" required="required">
+
+        <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+        <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+        <div>{{project.leadId}}</div>
+        <div class="row">
+            <strong class="col-md-4 text-right">project lead:</strong>
+            <div class="col-md-8 text-left">
+                <em class="col-md-8">{{user}}</em>
+                <select name="user" id="userId" class="form-control">
+                    <option ng-repeat="user in allUsers"{{user.Username}} value=""></option>
+                </select>
+            </div>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">project title:</strong>
@@ -13,38 +32,28 @@
             </div>
         </div>
         <div class="row">
-            <strong class="col-md-4 text-right">project lead:</strong>
-            <div class="col-md-8 text-left">
-                <input class="form-control" type="text" placeholder="{{project.Lead.Username}}" >
-            </div>
-        </div>
-        <div class="row">
             <strong class="col-md-4 text-right">project key:</strong>
             <em class="col-md-8">{{projectData.ProjectKey}}</em>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">labels:</strong>
             <div class="col-md-8">
-                <ul class="list-inline">
-                    <li class="project-priority text-left" ng-repeat="label in project.Labels">{{label.Name}}</li>
-                </ul>
+                <input type="text" class="form-control"
+                       placeholder="comma separated labels">
             </div>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">priorities:</strong>
             <div class="col-md-8">
-                <ul class="list-inline">
-                    <li class="project-priority text-left" ng-repeat="priority in project.Priorities">
-                        {{priority.Name}}
-                    </li>
-                </ul>
+                <input type="text" class="form-control"
+                       placeholder="comma separated priorities">
             </div>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">description:</strong>
             <div class="col-md-8 text-left">
-                <textarea class="form-control" name="description" id="" cols="30" rows="10">{{project.Description}}</textarea>
-
+                <textarea class="form-control" name="description" id=""
+                          cols="30" rows="10">{{project.Description}}</textarea>
             </div>
         </div>
         <div class="row">

@@ -99,6 +99,21 @@ angular.module('IssueTruck.users.authentication', [])
                 return deferred.promise;
             }
 
+            function getAllUsers() {
+                var deferred = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                $http.get(BASE_URL + 'users/')
+                    .then(function (response) {
+                        deferred.resolve(response);
+                    }, function (error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            }
+
             function logout() {
                 sessionStorage.clear();
                 $rootScope.user = undefined;
@@ -114,6 +129,7 @@ angular.module('IssueTruck.users.authentication', [])
                 logout: logout,
                 isLoggedIn: isLoggedIn,
                 getLoggedInUser: getLoggedInUser,
-                changePassword: changePassword
+                changePassword: changePassword,
+                getAllUsers: getAllUsers
             }
         }]);

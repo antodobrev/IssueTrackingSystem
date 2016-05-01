@@ -48,3 +48,7 @@ header img {
 .site-title a:hover {
   text-decoration: none;
 }
+
+.row {
+  margin: 10px 0;
+}
