@@ -3,12 +3,12 @@
     <p>add</p>
     <div class="col-md-5">
         <div class="row">
-            <h4 class="text-center col-md-12"><strong>project data</strong></h4>
+            <h4 class="text-center col-md-12"><strong>new project</strong></h4>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">project title:</strong>
             <div class="col-md-8 text-left">
-                <input ng-model="projectData.Name"
+                <input ng-model="projectData.Name" ng-change="generateKey(projectData.Name)"
                        class="form-control" type="text" placeholder="name of the project" >
             </div>
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">project key:</strong>
-            <em class="col-md-8">{{project.ProjectKey}}</em>
+            <em class="col-md-8">{{projectData.ProjectKey}}</em>
         </div>
         <div class="row">
             <strong class="col-md-4 text-right">labels:</strong>
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-8 text-right">
-                <button type="button" class="btn btn-success">save</button>
+                <button type="button" ng-click="addNewProject(projectData)" class="btn btn-success">save</button>
                 <a href="#/project/{{project.Id}}">cancel</a>
             </div>
         </div>

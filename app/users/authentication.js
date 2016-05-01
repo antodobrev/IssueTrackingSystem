@@ -3,7 +3,8 @@ angular.module('IssueTruck.users.authentication', [])
         '$http',
         '$q',
         'BASE_URL',
-        function ($http, $q, BASE_URL) {
+        '$rootScope',
+        function ($http, $q, BASE_URL, $rootScope) {
 
             function registerUser(regUserData) {
                 var deferred = $q.defer();
@@ -100,6 +101,7 @@ angular.module('IssueTruck.users.authentication', [])
 
             function logout() {
                 sessionStorage.clear();
+                $rootScope.user = undefined;
             }
 
             function isLoggedIn() {

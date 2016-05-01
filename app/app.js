@@ -22,7 +22,8 @@ angular.module('IssueTruck', [
             if (!authentication.isLoggedIn()) {
                 $location.path("/");
             }
-        })
+        });
+        $rootScope.user = $rootScope.user || sessionStorage.User;
     })
     .constant('BASE_URL', "http://softuni-issue-tracker.azurewebsites.net/");
 

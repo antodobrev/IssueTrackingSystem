@@ -23,5 +23,28 @@ body, body a {
 }
 
 .header a {
-  color: #000;
+  color: #444;
+}
+
+#no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+header img {
+  height:100%;
+  width: 100%;
+}
+
+.nav {
+  height:100%;
+}
+
+.site-title a {
+  font-size: 0.9em;
+  color: #ffffff;
+}
+
+.site-title a:hover {
+  text-decoration: none;
 }

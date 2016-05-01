@@ -50,7 +50,7 @@ angular.module(
 
             $rootScope.logout = function () {
                 authentication.logout();
-                $rootScope.user = undefined;
+                notifyService.waveMessage('successfully logged out', 'success');
                 $location.path('/');
             }
         }]);
