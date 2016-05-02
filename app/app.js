@@ -11,6 +11,7 @@ angular.module('IssueTruck', [
         'IssueTruck.dashboard',
         'IssueTruck.projects',
         'IssueTruck.projects.AddProjectController',
+        'IssueTruck.projects.EditProjectController',
         'IssueTruck.issues',
         'myApp.version',
         'ui.bootstrap'

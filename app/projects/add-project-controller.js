@@ -55,7 +55,7 @@ angular.module('IssueTruck.projects.AddProjectController', ['ngRoute', 'IssueTru
                             }
                         };
                     });
-            }
+            };
 
             // authentication.getAllUsers().then(function (response) {
             //     $scope.allUsers = response.data;

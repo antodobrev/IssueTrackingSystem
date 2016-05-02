@@ -11,24 +11,7 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
             templateUrl: 'Projects/projectPage.html',
             controller: 'ProjectController'
         });
-        $routeProvider.when('/project/:id/edit', {
-            templateUrl: 'Projects/editProjectPage.html',
-            controller: 'EditProjectController'
-        });
     }])
-
-    .controller('EditProjectController', [
-        '$scope',
-        'projectsGetter',
-        '$routeParams',
-        function ($scope, projectsGetter, $routeParams) {
-            var projectId = $routeParams.id;
-            projectsGetter.getProjectById(projectId).then(function (projectData) {
-                console.log(projectData.data);
-                $scope.project = projectData.data;
-            })
-        }
-    ])
 
     .controller('ProjectController', [
         '$scope',
@@ -40,7 +23,6 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                 console.log(projectData.data);
                 $scope.project = projectData.data;
                 projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
-                    console.log(issues.data);
                     $scope.Issues = issues.data;
                 })
             })

@@ -1,55 +1,15 @@
 <div class="container-fluid">
-    <div ng-include="'Projects/partials/projectHeader.html'" class="row"></div>
-    <p>edit</p>
-    <div class="col-md-5">
+    <div class="col-md-8">
         <div class="row">
-            <h4 class="text-center col-md-12"><strong>project data</strong></h4>
+            <h4 class="text-center col-md-12"><strong>{{project.Name}}</strong></h4>
         </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project title:</strong>
-            <div class="col-md-8 text-left">
-                <input class="form-control" type="text" placeholder="{{project.Name}}" >
-            </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project lead:</strong>
-            <div class="col-md-8 text-left">
-                <input class="form-control" type="text" placeholder="{{project.Lead.Username}}" >
-            </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">project key:</strong>
-            <em class="col-md-8">{{project.ProjectKey}}</em>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">labels:</strong>
-            <div class="col-md-8">
-                <ul class="list-inline">
-                    <li class="project-priority text-left" ng-repeat="label in project.Labels">{{label.Name}}</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">priorities:</strong>
-            <div class="col-md-8">
-                <ul class="list-inline">
-                    <li class="project-priority text-left" ng-repeat="priority in project.Priorities">
-                        {{priority.Name}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <strong class="col-md-4 text-right">description:</strong>
-            <div class="col-md-8 text-left">
-                <textarea class="form-control" name="description" id="" cols="30" rows="10">{{project.Description}}</textarea>
 
-            </div>
+        <div ng-include="'projects/partials/project-input-data.html'" class="input-data">
         </div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-8 text-right">
-                <button type="button" class="btn btn-success">save</button>
+                <button type="button" ng-click="addNewProject(project)" class="btn btn-success">save</button>
                 <a href="#/project/{{project.Id}}">cancel</a>
             </div>
         </div>
