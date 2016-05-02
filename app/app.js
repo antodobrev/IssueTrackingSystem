@@ -5,6 +5,7 @@ angular.module('IssueTruck', [
         'ngCookies',
         'IssueTruck.home',
         'IssueTruck.notyService',
+        'IssueTruck.common.datepicker',
         'IssueTruck.users.authentication',
         'IssueTruck.users.userController',
         'IssueTruck.users.passwordController',
@@ -13,6 +14,7 @@ angular.module('IssueTruck', [
         'IssueTruck.projects.AddProjectController',
         'IssueTruck.projects.EditProjectController',
         'IssueTruck.issues',
+        'IssueTruck.issues.AddIssueController',
         'myApp.version',
         'ui.bootstrap'
     ])

@@ -1,0 +1,77 @@
+<script>
+    $('#add-issue-modal').modal('toggle');
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="add-issue-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">add new issue to
+                    <strong>{{project.Name}}</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!-- title -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">issue title:</strong>
+                    <div class="col-md-6 text-left">
+                        <input ng-model="issue.Name" class="form-control" type="input">
+                    </div>
+                </div>
+                <!-- lead -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">assignee:</strong>
+                    <div class="col-md-6 text-left">
+                        <input id="leadUsername" type="text" ng-model="project.leadId" placeholder="assignee username"
+                               uib-typeahead="user.Id as user.Username for user in users | filter:$viewValue | limitTo:8"
+                               typeahead-loading="loadingUsers" typeahead-no-results="noResults"
+                               typeahead-input-formatter="formatLead($model)"
+                               class="form-control" required="required">
+
+                        <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                        </div>
+                        <div>{{project.leadId}}</div>
+                    </div>
+                </div>
+                <!-- due date -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">due date:</strong>
+                    <div class="col-md-6 text-left">
+                        <input class="form-control" type="text" date-picker
+                               minDate="0D" maxDate="1Y">
+                    </div>
+                </div>
+                <!-- priority -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">priority:</strong>
+                    <div class="col-md-6 text-left">
+                        <select class="form-control" name="priority" id="priority">
+                            <option class="form-control"
+                                    ng-repeat="priority in project.Priorities" value="">
+                                {{priority.Name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- desc -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">issue description:</strong>
+                    <div class="col-md-6 text-left">
+                        <textarea ng-model="issue.Description" class="form-control" type="input">
+                            </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#/project/{{project.Id}}/" type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
