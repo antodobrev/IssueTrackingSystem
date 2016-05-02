@@ -22,8 +22,47 @@ angular.module('IssueTruck.issues', [])
                 return defered.promise;
             }
 
+            function addIssue(issueData) {
+                var defered = $q.defer();
+
+                var config = {
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                };
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                var data = 'title='
+                    + issueData.Title
+                    + '&description='
+                    + issueData.Description
+                    + '&dueDate='
+                    + issueData.DueDate
+                    + '&projectId='
+                    + issueData.ProjectId
+                    + '&assigneeId='
+                    + issueData.AssigneeId
+                    + '&priorityId='
+                    + issueData.priorityId;
+
+                var counter = 0;
+                for (var label in issueData.labels) {
+                    data += '&labels[' + counter + '].Name=' + issueData.labels[label];
+                    counter++;
+                }
+
+                console.log(data);
+                $http.post(BASE_URL + 'issues', data, config).then(function (response) {
+                    defered.resolve(response);
+                }, function (err) {
+                    console.log(err);
+                }); 
+
+                return defered.promise;
+            }
+
             return {
                 getMyIssues: getMyIssues,
+                addIssue: addIssue
             }
         }
     ]);

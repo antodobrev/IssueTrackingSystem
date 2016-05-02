@@ -14,14 +14,19 @@ angular.module('IssueTruck.issues.AddIssueController', ['ngRoute'])
         'projectsGetter',
         '$routeParams',
         'authentication',
-        function ($scope, projectsGetter, $routeParams, authentication) {
+        'issueService',
+        function ($scope, projectsGetter, $routeParams, authentication, issueService) {
             projectsGetter.getProjectById($routeParams.id)
                 .then(function (response) {
                     $scope.project = response.data;
-                    console.log(response.data);
                 }, function (error) {
                     console.log(error);
                 });
+
+            $scope.getPriority = function (priorityId) {
+                console.log(priorityId);
+                $scope.issue.priorityId = priorityId;
+            };
 
             $scope.loadingUsers = authentication.getAllUsers()
                 .then(function (response) {
@@ -36,4 +41,32 @@ angular.module('IssueTruck.issues.AddIssueController', ['ngRoute'])
                 }, function (error) {
                     console.log(error);
                 });
+
+            $scope.numberOfLabels = new Array(1);
+
+            $scope.increaseLabels = function () {
+                $scope.numberOfLabels.push("");
+            };
+
+            $scope.loadingLabels = function (input) {
+                projectsGetter.getAllLabels(input)
+                    .then(function (response) {
+                        $scope.labels = response.data;
+                        $scope.formatLabel = function (model) {
+                            for (var i = 0; i < $scope.labels.length; i++) {
+                                if (model === $scope.labels[i].Name) {
+                                    return $scope.labels[i].Name;
+                                }
+                            }
+                        };
+                    });
+            };
+            
+            $scope.addIssue = function (issueData) {
+                issueData.ProjectId = $scope.project.Id;
+                console.log(issueData);
+                issueService.addIssue(issueData).then(function (response) {
+                    console.log(response.data);
+                })
+            }
         }]);

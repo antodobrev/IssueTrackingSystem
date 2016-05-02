@@ -19,14 +19,14 @@
                 <div class="row">
                     <strong class="col-md-4 text-right">issue title:</strong>
                     <div class="col-md-6 text-left">
-                        <input ng-model="issue.Name" class="form-control" type="input">
+                        <input ng-model="issue.Title" class="form-control" type="input">
                     </div>
                 </div>
                 <!-- lead -->
                 <div class="row">
                     <strong class="col-md-4 text-right">assignee:</strong>
                     <div class="col-md-6 text-left">
-                        <input id="leadUsername" type="text" ng-model="project.leadId" placeholder="assignee username"
+                        <input id="leadUsername" type="text" ng-model="issue.AssigneeId" placeholder="assignee username"
                                uib-typeahead="user.Id as user.Username for user in users | filter:$viewValue | limitTo:8"
                                typeahead-loading="loadingUsers" typeahead-no-results="noResults"
                                typeahead-input-formatter="formatLead($model)"
@@ -36,14 +36,14 @@
                         <div ng-show="noResults">
                             <i class="glyphicon glyphicon-remove"></i> No Results Found
                         </div>
-                        <div>{{project.leadId}}</div>
+                        <div>{{issue.AssigneeId}}</div>
                     </div>
                 </div>
                 <!-- due date -->
                 <div class="row">
                     <strong class="col-md-4 text-right">due date:</strong>
                     <div class="col-md-6 text-left">
-                        <input class="form-control" type="text" date-picker
+                        <input ng-model="issue.DueDate" class="form-control" type="text" date-picker
                                minDate="0D" maxDate="1Y">
                     </div>
                 </div>
@@ -51,14 +51,41 @@
                 <div class="row">
                     <strong class="col-md-4 text-right">priority:</strong>
                     <div class="col-md-6 text-left">
-                        <select class="form-control" name="priority" id="priority">
-                            <option class="form-control"
-                                    ng-repeat="priority in project.Priorities" value="">
-                                {{priority.Name}}
-                            </option>
+                        <select ng-model="issue.priorityId"
+                                class="form-control" name="priority" id="priority">
+                            <option ng-repeat="priority in project.Priorities"
+                                    value="{{priority.Id}}">{{priority.Name}}</option>
                         </select>
                     </div>
                 </div>
+                <!-- labels -->
+
+                <!-- labels -->
+                <div class="row">
+                    <strong class="col-md-4 text-right">labels:</strong>
+                </div>
+                <div ng-repeat="lb in numberOfLabels track by $index" class="row">
+                    <strong class="col-md-4 text-right">label {{$index + 1}}:</strong>
+
+                    <div class="col-md-6 text-left">
+                        <input data-role="tagsinput" id="labels" type="text" ng-model="issue.labels[$index]"
+                               placeholder="label"
+                               uib-typeahead="label.Name as label.Name for label in labels | filter:$viewValue | limitTo:8"
+                               ng-change="loadingLabels(issue.labels[$index])" typeahead-no-results="noResults"
+                               typeahead-input-formatter="formatLabel($model)"
+                               class="form-control" required="required">
+                        <span>{{issue.labels[$index]}}</span>
+                        <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found (will be added as new issue)
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <span ng-click="increaseLabels()" class="glyphicon glyphicon-plus-sign"></span>
+                    </div>
+
+                </div>
+
                 <!-- desc -->
                 <div class="row">
                     <strong class="col-md-4 text-right">issue description:</strong>
@@ -70,7 +97,7 @@
             </div>
             <div class="modal-footer">
                 <a href="#/project/{{project.Id}}/" type="button" class="btn btn-default" data-dismiss="modal">Close</a>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="addIssue(issue)" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
