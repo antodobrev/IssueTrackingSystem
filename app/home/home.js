@@ -49,8 +49,9 @@ angular.module(
             };
 
             $rootScope.logout = function () {
-                authentication.logout();
-                notifyService.waveMessage('successfully logged out', 'success');
-                $location.path('/');
+                authentication.logout().then(function () {
+                    notifyService.waveMessage('successfully logged out', 'success');
+                    $location.path('/');
+                });
             }
         }]);

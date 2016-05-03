@@ -115,8 +115,10 @@ angular.module('IssueTruck.users.authentication', [])
             }
 
             function logout() {
-                sessionStorage.clear();
-                $rootScope.user = undefined;
+                var deffered = $q.defer();
+                deffered.resolve(sessionStorage.clear());
+                deffered.resolve($rootScope.user = undefined);
+                return deffered.promise;
             }
 
             function isLoggedIn() {

@@ -17,15 +17,19 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
         '$scope',
         'projectsGetter',
         '$routeParams',
-        function ($scope, projectsGetter, $routeParams) {
+        '$location',
+        function ($scope, projectsGetter, $routeParams, $location) {
             var projectId = $routeParams.id;
             projectsGetter.getProjectById(projectId).then(function (projectData) {
-                console.log(projectData.data);
                 $scope.project = projectData.data;
                 projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
                     $scope.Issues = issues.data;
                 })
-            })
+            });
+
+            $scope.goToIssuePage = function (issue) {
+                $location.path('issue/' + issue.Id);
+            }
         }
     ])
 
@@ -47,5 +51,5 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                 projectsGetter.getProjectById(id).then(function (projectData) {
                     console.log(projectData);
                 })
-            }
+            };
     }]);

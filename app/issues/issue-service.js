@@ -55,7 +55,7 @@ angular.module('IssueTruck.issues', [])
                     defered.resolve(response);
                 }, function (err) {
                     console.log(err);
-                }); 
+                });
 
                 return defered.promise;
             }

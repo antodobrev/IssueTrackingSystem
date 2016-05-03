@@ -1,3 +1,4 @@
+<h4 class="bg-danger page-header">Project page</h4>
 <div class="container-fluid">
     <div ng-include="'Projects/partials/projectHeader.html'" class="row"></div>
     <div class="row">
@@ -17,7 +18,9 @@
                 <strong class="col-md-4 text-right">labels:</strong>
                 <div class="col-md-8">
                     <ul class="list-inline">
-                        <li class="project-priority text-left" ng-repeat="label in project.Labels">{{label.Name}}</li>
+                        <li class="project-priority text-left" ng-repeat="label in project.Labels">
+                            <span class="bg-primary label">{{label.Name}}</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +29,7 @@
                 <div class="col-md-8">
                     <ul class="list-inline">
                         <li class="project-priority text-left" ng-repeat="priority in project.Priorities">
-                            {{priority.Name}}
+                            <span class="bg-danger label priority">{{priority.Name}}</span>
                         </li>
                     </ul>
                 </div>

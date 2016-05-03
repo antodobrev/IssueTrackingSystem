@@ -14,12 +14,11 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="all">
-
+            <div ng-include="'projects/partials/tableOfProjectsAsLead.html'"></div>
+            <div ng-include="'projects/partials/tableOfProjects.html'"></div>
         </div>
         <div role="tabpanel" class="tab-pane" id="lead">
-            <ul>
-                <li ng-repeat="project in projectsAsLead">{{project.Name}}</li>
-            </ul>
+            <div ng-include="'projects/partials/tableOfProjectsAsLead.html'"></div>
         </div>
     </div>
 

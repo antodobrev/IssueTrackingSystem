@@ -62,3 +62,21 @@ input::-webkit-calendar-picker-indicator{
   display: none;
 }
 
+.priority {
+  background-color: #F2516E;
+}
+
+.page-header {
+  padding: 10px;
+  margin: 16px 0 0 0;
+  border-radius: 5px;
+}
+
+.border-bottom {
+  border-bottom: 3px double #ddd;
+  padding: 5px;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}

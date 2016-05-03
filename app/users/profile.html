@@ -1,6 +1,16 @@
-<p>{{user}}</p>
-<a href="#/profile/password" class="btn btn-default" type="button">cbahge passoword</a>
-
-<div ng-if="isAdmin" class="admin">
-    <a href="#/projects/add" type="button" class="btn btn-info">add project</a>
+<h4 class="bg-danger page-header">Profile <span class="glyphicon glyphicon-user"></span></h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="col-sm-offset-1 col-md-3" src="assets/prof-pic.png" alt="">
+            <p><strong>username: </strong>{{user}}</p>
+            <a href="#/profile/password" class="btn btn-default" type="button">change passoword</a>
+        </div>
+        <div ng-if="isAdmin" class="col-md-6 admin">
+            <h4>admin controls</h4>
+            <a href="#/projects/add" type="button" class="btn btn-info">add project</a>
+            <a href="#/projects" type="button" class="btn btn-info">all projects</a>
+        </div>
+    </div>
 </div>
+
