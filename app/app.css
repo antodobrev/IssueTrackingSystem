@@ -80,3 +80,11 @@ input::-webkit-calendar-picker-indicator{
 .clickable:hover {
   cursor: pointer;
 }
+
+.desc {
+  background-color: #ffffff;
+  max-width: 250px;
+  min-height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}

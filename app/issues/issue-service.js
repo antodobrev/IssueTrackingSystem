@@ -22,6 +22,21 @@ angular.module('IssueTruck.issues', [])
                 return defered.promise;
             }
 
+            function getIssueById(issueId) {
+                var defered = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                $http.get(BASE_URL + 'issues/' + issueId)
+                    .then(function (response) {
+                        defered.resolve(response);
+                    }, function (err) {
+                        console.log(err);
+                    });
+
+                return defered.promise;
+            }
+
             function addIssue(issueData) {
                 var defered = $q.defer();
 
@@ -62,7 +77,8 @@ angular.module('IssueTruck.issues', [])
 
             return {
                 getMyIssues: getMyIssues,
-                addIssue: addIssue
+                addIssue: addIssue,
+                getIssueById: getIssueById
             }
         }
     ]);

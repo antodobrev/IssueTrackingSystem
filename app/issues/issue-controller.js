@@ -11,6 +11,11 @@ angular.module('IssueTruck.issues.issuePage', ['ngRoute'])
 
     .controller('IssuesController', [
         '$scope',
-        function ($scope, projectsGetter) {
-
+        'issueService',
+        '$routeParams',
+        function ($scope, issueService, $routeParams) {
+            issueService.getIssueById($routeParams.id).then(function (response) {
+                console.log(response.data);
+                $scope.issue = response.data;
+            })
         }]);
