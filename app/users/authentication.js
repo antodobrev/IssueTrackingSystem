@@ -90,10 +90,9 @@ angular.module('IssueTruck.users.authentication', [])
                 console.log(data);
                 $http.post(BASE_URL + 'api/Account/ChangePassword', data, config)
                     .then(function (response) {
-                        console.log(response);
-
-                    }, function () {
-
+                        deferred.resolve(response);
+                    }, function (error) {
+                        deferred.reject(error);
                     });
 
                 return deferred.promise;
