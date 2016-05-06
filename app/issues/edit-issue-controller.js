@@ -3,7 +3,7 @@
 angular.module('IssueTruck.issues.editIssuePage', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/issue/:id', {
+        $routeProvider.when('/issue/:id/edit', {
             templateUrl: 'issues/edit-issuePage.html',
             controller: 'EditIssueController'
         });

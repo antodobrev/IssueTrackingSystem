@@ -42,7 +42,25 @@ angular.module('IssueTruck.projects.getter', [])
 
                 $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
 
-                $http.get(BASE_URL + 'projects?filter=&pageSize=4&pageNumber=1').then(function (response) {
+                $http.get(BASE_URL + 'projects').then(function (response) {
+                    defered.resolve(response);
+                }, function (err) {
+                    console.log(err);
+                });
+
+                return defered.promise;
+            }
+
+            function getProjectsByFilter(pageSize, pageNumber) {
+                var defered = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                var urlTopass = BASE_URL + 'projects?filter=&'
+                + 'pageSize=' + pageSize
+                + '&pageNumber=' + pageNumber;
+
+                $http.get(urlTopass).then(function (response) {
                     defered.resolve(response);
                 }, function (err) {
                     console.log(err);
@@ -165,7 +183,8 @@ angular.module('IssueTruck.projects.getter', [])
                 getProjectsByLeaderId: getProjectsByLeaderId,
                 addProject: addProject,
                 getAllLabels: getAllLabels,
-                editProject: editProject
+                editProject: editProject,
+                getProjectsByFilter: getProjectsByFilter
             }
         }
     ]);

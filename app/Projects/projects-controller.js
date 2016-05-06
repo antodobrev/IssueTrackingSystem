@@ -73,15 +73,32 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
         '$scope',
         'projectsGetter',
         function($scope, projectsGetter) {
-            projectsGetter.getProjects().then(function (projectsData) {
-                $scope.projects = projectsData.data.Projects;
-                $scope.projects.forEach(function (el) {
-                    projectsGetter.getProjectIssues(el.Id).then(function (issues) {
-                        console.log(issues.data);
-                    })
-                })
-            });
+       /*     projectsGetter.getProjects().then(function (projectsData) {
+                $scope.projects = projectsData.data;
+                console.log(projectsData.data.length);
+                $scope.bigTotalItems = projectsData.data.TotalCount;
+                $scope.bigCurrentPage = 1;
+
+                $scope.setPage = function (pageNo) {
+                    $scope.currentPage = pageNo;
+                    console.log(pageNo);
+                };
+            });*/
+
+
             
+            $scope.reloadProjects = function (bigCurrentPage) {
+                console.log(bigCurrentPage);
+                projectsGetter.getProjectsByFilter(5, bigCurrentPage).then(function (response) {
+                    $scope.projects = response.data.Projects;
+                    $scope.bigTotalItems = response.data.TotalCount;
+                    console.log(response.data);
+                }, function (error) {
+                    console.log(error);
+                })
+            };
+
+            $scope.reloadProjects(1);
 
             $scope.triggerGetProject = function(id) {
                 projectsGetter.getProjectById(id).then(function (projectData) {

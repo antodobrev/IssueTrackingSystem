@@ -4,7 +4,7 @@
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
             <a href="#all" aria-controls="all" role="tab"
-               data-toggle="tab">all projects</a>
+               data-toggle="tab">involved in projects</a>
         </li>
         <li role="presentation">
             <a href="#lead" aria-controls="lead" role="lead" data-toggle="tab">projects as lead</a>
@@ -14,7 +14,6 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="all">
-            <div ng-include="'projects/partials/tableOfProjectsAsLead.html'"></div>
             <div ng-include="'projects/partials/tableOfProjects.html'"></div>
         </div>
         <div role="tabpanel" class="tab-pane" id="lead">

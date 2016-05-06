@@ -92,3 +92,16 @@ input::-webkit-calendar-picker-indicator{
   border: 1px solid #ddd;
   border-radius: 10px;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%
+}
+
+td {
+  word-wrap: break-word
+}
+
+.no-margin {
+  margin: 0;
+}
