@@ -38,12 +38,16 @@
                 <strong class="col-md-4 text-right">description:</strong>
                 <div class="col-md-8 text-left">{{project.Description}}</div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="isAdmin || isLead">
                 <div class="col-md-4"></div>
                 <div class="col-md-8 text-right">
                     <a href="#/project/{{project.Id}}/edit" type="button" class="btn btn-default">edit project</a>
-                    <a href="#/project/{{project.Id}}/add-issue" type="button" class="btn btn-info">add issue</a>
+                    <!--<a href="#/project/{{project.Id}}/add-issue" type="button" class="btn btn-info">add issue</a> -->
+                    <button type="button" ng-click="toggleModal()" class="btn btn-info">add issue</button>
                 </div>
+            </div>
+            <div class="row" ng-if="isAdmin === undefined && isLead === undefined">
+                <em class="bg-danger page-header" >Only project leads can edit and add issues to this project</em>
             </div>
         </div>
         <div class="col-md-6">
@@ -57,3 +61,6 @@
         </div>
     </div>
 </div>
+
+<!-- modal add issue -->
+<div ng-include="'issues/add-issue.html'"></div>

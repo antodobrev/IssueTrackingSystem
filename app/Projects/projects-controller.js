@@ -18,10 +18,20 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
         'projectsGetter',
         '$routeParams',
         '$location',
-        function ($scope, projectsGetter, $routeParams, $location) {
+        'authentication',
+        'labelSeeder',
+        'issueService',
+        'userTypeaheadLoader',
+        'notifyService',
+        function ($scope, projectsGetter, $routeParams, $location,
+                  authentication, labelSeeder, issueService, userTypeaheadLoader, notifyService) {
+
             var projectId = $routeParams.id;
             projectsGetter.getProjectById(projectId).then(function (projectData) {
                 $scope.project = projectData.data;
+                if ($scope.project.Lead.Id === sessionStorage.userId) {
+                    $scope.isLead = true;
+                }
                 projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
                     $scope.Issues = issues.data;
                 })
@@ -29,6 +39,32 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
 
             $scope.goToIssuePage = function (issue) {
                 $location.path('issue/' + issue.Id);
+            };
+
+            authentication.getLoggedInUser(sessionStorage.token).then(function (response) {
+                if (response.data.isAdmin) {
+                    $scope.isAdmin = true;
+                }
+            });
+
+            $scope.addIssue = function(newIssueData) {
+                newIssueData.ProjectId = $scope.project.Id;
+                issueService.addIssue(newIssueData).then(function (response) {
+                    console.log(response.data);
+                    notifyService.waveMessage("issue added successfully", "success");
+                    projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
+                        $scope.Issues = issues.data;
+                    })
+                    $('#add-issue-modal').modal('toggle');
+                }, function (error) {
+                    notifyService.showError(error.data);
+                });
+            };
+
+            $scope.toggleModal = function () {
+                $('#add-issue-modal').modal('toggle');
+                labelSeeder.seedLabels($scope);
+                userTypeaheadLoader.seedLoader($scope);
             }
         }
     ])

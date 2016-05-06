@@ -18,8 +18,23 @@ angular.module('IssueTruck.projects.EditProjectController', ['ngRoute', 'IssueTr
         'userTypeaheadLoader',
         'notifyService',
         '$location',
+        'authentication',
         function ($scope, projectsGetter, $routeParams,
-                  labelSeeder, projectKeyGenerator, userTypeaheadLoader, notifyService, $location) {
+                  labelSeeder, projectKeyGenerator,
+                  userTypeaheadLoader, notifyService, $location, authentication) {
+
+            authentication.getLoggedInUser(sessionStorage.token).then(function (response) {
+                if (response.data.isAdmin) {
+                    $scope.isAdmin = true;
+                }
+                $scope.userId = response.data.Id;
+                projectsGetter.getProjectById($routeParams.id).then(function (projectData) {
+                    $scope.project = projectData.data;
+                    if (!$scope.isAdmin || $scope.project.Lead.Id !== $scope.userId) {
+                        $location.path('#/dashboard');
+                    }
+                });
+            });
 
             labelSeeder.seedLabels($scope);
 
@@ -27,9 +42,7 @@ angular.module('IssueTruck.projects.EditProjectController', ['ngRoute', 'IssueTr
 
             userTypeaheadLoader.seedLoader($scope);
 
-            projectsGetter.getProjectById($routeParams.id).then(function (projectData) {
-                $scope.project = projectData.data;
-            });
+
 
             $scope.updateProject = function (projectData) {
                 //debugger;
