@@ -11,7 +11,7 @@
     <tr class="clickable" ng-click="goToIssuePage(issue)" ng-repeat="issue in Issues">
         <td>{{issue.Title}}</td>
         <td>{{issue.Description}}</td>
-        <td>{{issue.DueDate}}</td>
+        <td>{{issue.DueDate | date: 'MMM dd yyyy'}}</td>
         <td>{{issue.Assignee.Username}}</td>
     </tr>
     </tbody>

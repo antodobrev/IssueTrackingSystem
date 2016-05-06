@@ -1,18 +1,16 @@
-<div class="container-fluid">
+<h4 class="col-md-12 bg-danger page-header">New project <span class="glyphicon glyphicon-log-in"></span></h4>
+<form name="newProjectForm" class="container-fluid">
     <div class="col-md-8">
-        <div class="row">
-            <h4 class="text-center col-md-12"><strong>new project</strong></h4>
-        </div>
-
         <div ng-include="'projects/partials/project-input-data.html'" class="input-data">
         </div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-8 text-right">
-                <button type="button" ng-click="addNewProject(project)" class="btn btn-success">save</button>
-                <a href="#/project/{{project.Id}}">cancel</a>
+                <button type="button" ng-disabled="newProjectForm.$invalid"
+                        ng-click="addNewProject(project)" class="btn btn-success">save</button>
+                <a href="#/profile/">cancel</a>
             </div>
         </div>
     </div>
-</div>
+</form>
 

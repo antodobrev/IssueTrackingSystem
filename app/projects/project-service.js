@@ -103,12 +103,53 @@ angular.module('IssueTruck.projects.getter', [])
                     counter++;
                 }
                 var priorities = projectData.priorities.split( /,\s/);
+                counter = 0;
                 priorities.forEach(function (p) {
                     data += '&priorities[' + counter + '].Name=' + p;
+                    counter++;
                 });
                 
                 console.log(data);
                 $http.post(BASE_URL + 'projects', data, config).then(function (response) {
+                    defered.resolve(response);
+                }, function (err) {
+                    console.log(err);
+                });
+
+                return defered.promise;
+            }
+
+            function editProject(newData) {
+                var defered = $q.defer();
+
+                var config = {
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                };
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                var data = 'name='
+                    + newData.Name
+                    + '&description='
+                    + newData.Description
+                    + '&leadId='
+                    + newData.leadId;
+
+                var counter = 0;
+                for (var label in newData.labels) {
+                    data += '&labels[' + counter + '].Name=' + newData.labels[label];
+                    counter++;
+                }
+                var priorities = newData.priorities.split( /,\s/);
+                counter = 0;
+                priorities.forEach(function (p) {
+                    data += '&priorities[' + counter + '].Name=' + p;
+                    counter++;
+                });
+
+                console.log(data);
+                var urlTopass = BASE_URL + 'projects/' + newData.Id;
+                $http.put(urlTopass, data, config).then(function (response) {
                     defered.resolve(response);
                 }, function (err) {
                     console.log(err);
@@ -123,7 +164,8 @@ angular.module('IssueTruck.projects.getter', [])
                 getProjectIssues: getProjectIssues,
                 getProjectsByLeaderId: getProjectsByLeaderId,
                 addProject: addProject,
-                getAllLabels: getAllLabels
+                getAllLabels: getAllLabels,
+                editProject: editProject
             }
         }
     ]);

@@ -24,7 +24,8 @@ angular.module(
             $scope.login = function (userData) {
                 authentication.loginUser(userData)
                     .then(function (response) {
-                        $rootScope.user = response.userName;
+                        console.log(response);
+                        $rootScope.user = response.Username;
                         notifyService.waveMessage('successfully logged in', 'success');
                         $location.path('/dashboard');
                     }, function (error) {
@@ -39,9 +40,13 @@ angular.module(
                         console.log(response);
                         var userData = {};
                         userData.Password = regUserData.Password;
-                        userData.Username = regUserData.Email;
+                        userData.Username = regUserData.Username;
                         console.log(userData);
-                        authentication.loginUser(userData)
+                        authentication.loginUser(userData).then(function (response) {
+                            $rootScope.user = response.userName;
+                            notifyService.waveMessage('successfully registered', 'success');
+                            $location.path('/dashboard');
+                        })
                     }, function (error) {
                         console.log(error.data);
                         notifyService.showError('register error', error.data)

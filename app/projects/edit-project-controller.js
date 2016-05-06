@@ -13,11 +13,37 @@ angular.module('IssueTruck.projects.EditProjectController', ['ngRoute', 'IssueTr
         '$scope',
         'projectsGetter',
         '$routeParams',
-        function ($scope, projectsGetter, $routeParams) {
-            var projectId = $routeParams.id;
-            projectsGetter.getProjectById(projectId).then(function (projectData) {
-                console.log(projectData.data);
+        'labelSeeder',
+        'projectKeyGenerator',
+        'userTypeaheadLoader',
+        'notifyService',
+        '$location',
+        function ($scope, projectsGetter, $routeParams,
+                  labelSeeder, projectKeyGenerator, userTypeaheadLoader, notifyService, $location) {
+
+            labelSeeder.seedLabels($scope);
+
+            projectKeyGenerator.seedProjectKeyGenerator($scope);
+
+            userTypeaheadLoader.seedLoader($scope);
+
+            projectsGetter.getProjectById($routeParams.id).then(function (projectData) {
                 $scope.project = projectData.data;
-            })
+            });
+
+            $scope.updateProject = function (projectData) {
+                //debugger;
+                var collectedProjectData = projectData;
+                console.log(collectedProjectData);
+
+                projectsGetter.editProject(collectedProjectData)
+                    .then(function (projectData) {
+                        console.log(projectData.data);
+                        notifyService.waveMessage('Project updated successfully', 'success');
+                        $location.path('/project/' + projectData.data.Id);
+                    }, function (error) {
+                        notifyService.showError(error.data);
+                    })
+            }
         }
     ]);

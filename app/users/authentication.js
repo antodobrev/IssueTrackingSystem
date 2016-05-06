@@ -58,11 +58,11 @@ angular.module('IssueTruck.users.authentication', [])
                         sessionStorage.User = response.data.userName;
                         sessionStorage.token = response.data.access_token;
                         var loggedUserData = {};
-                        deferred.resolve(response.data);
+                        //deferred.resolve(response.data);
                         getLoggedInUser(response.data.access_token).then(function (logedInResponse) {
                             loggedUserData = logedInResponse.data;
                             sessionStorage.userId = loggedUserData.Id;
-                            deferred.resolve(loggedUserData.data);
+                            deferred.resolve(loggedUserData);
                         });
 
                     }, function (error) {
