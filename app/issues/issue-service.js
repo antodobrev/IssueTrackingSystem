@@ -75,10 +75,26 @@ angular.module('IssueTruck.issues', [])
                 return defered.promise;
             }
 
+            function editStatus(issueId, newStatusId) {
+                var defered = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                $http.put(BASE_URL + 'issues/' + issueId + '/changestatus?statusid=' + newStatusId)
+                    .then(function (response) {
+                        defered.resolve(response);
+                    }, function (err) {
+                        console.log(err);
+                    });
+
+                return defered.promise;
+            }
+
             return {
                 getMyIssues: getMyIssues,
                 addIssue: addIssue,
-                getIssueById: getIssueById
+                getIssueById: getIssueById,
+                editStatus: editStatus
             }
         }
     ]);

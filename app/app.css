@@ -66,6 +66,10 @@ input::-webkit-calendar-picker-indicator{
   background-color: #F2516E;
 }
 
+.status {
+  background-color: #00AD2B;
+}
+
 .page-header {
   padding: 10px;
   margin: 16px 0 0 0;

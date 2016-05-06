@@ -54,7 +54,7 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                     notifyService.waveMessage("issue added successfully", "success");
                     projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
                         $scope.Issues = issues.data;
-                    })
+                    });
                     $('#add-issue-modal').modal('toggle');
                 }, function (error) {
                     notifyService.showError(error.data);

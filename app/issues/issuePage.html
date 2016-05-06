@@ -3,43 +3,64 @@
     <h3 class="text-center col-md-12">
         <span class="border-bottom">{{issue.Title}}</span>
     </h3>
-    <div class="row">
-        <strong class="col-md-4 text-right">issue key:</strong>
-        <div class="col-md-8 text-left">
-            <em> {{issue.IssueKey}}</em>
+    <div class="col-md-6 col-md-offset-1">
+        <div class="row text-left border-bottom"><strong>details</strong></div>
+        <div class="row">
+            <strong class="col-md-4 text-right">issue key:</strong>
+            <div class="col-md-8 text-left">
+                <em> {{issue.IssueKey}}</em>
+            </div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">due data:</strong>
+            <div class="col-md-8 text-left">{{issue.DueDate | date: 'MMM dd yyyy'}}</div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">labels:</strong>
+            <div class="col-md-8 text-left">
+                <ul class="list-inline">
+                    <li class="project-priority text-left" ng-repeat="label in issue.Labels">
+                        <span class="bg-primary label">{{label.Name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">priority:</strong>
+            <div class="col-md-8 text-left">
+                <span class="bg-danger label priority"> {{issue.Priority.Name}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">details:</strong>
+            <div class="col-md-8 text-left desc">{{issue.Description}}</div>
+        </div>
+        <div class="row">
+            <div class="text-right">
+                <a href="#/issue/{{issue.Id}}/edit" type="button" class="btn btn-info">edit issue</a>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">due data:</strong>
-        <div class="col-md-8 text-left">{{issue.DueDate | date: 'MMM dd yyyy'}}</div>
-    </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">assignee:</strong>
-        <div class="col-md-8 text-left">{{issue.Assignee.Username}}</div>
-    </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">reporter:</strong>
-        <div class="col-md-8 text-left">{{issue.Author.Username}}</div>
-    </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">labels:</strong>
-        <div class="col-md-8 text-left">
-            <ul class="list-inline">
-                <li class="project-priority text-left" ng-repeat="label in issue.Labels">
-                    <span class="bg-primary label">{{label.Name}}</span>
-                </li>
-            </ul>
+
+    <div class="col-md-4">
+        <div class="row text-left border-bottom"><strong>people and status</strong></div>
+        <div class="row">
+            <strong class="col-md-4 text-right">assignee:</strong>
+            <div class="col-md-8 text-left">{{issue.Assignee.Username}}</div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">reporter:</strong>
+            <div class="col-md-8 text-left">{{issue.Author.Username}}</div>
+        </div>
+        <div class="row">
+            <strong class="col-md-4 text-right">status:</strong>
+            <div class="col-md-8 text-left clickable" ng-click="toggleStatusModal()">
+                <span class="label status"
+                      data-toggle="tooltip" data-placement="right" title="click to edit"
+                > {{issue.Status.Name}}</span>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">priority:</strong>
-        <div class="col-md-8 text-left bg-danger label priority">
-            {{issue.Priority.Name}}
-        </div>
-    </div>
-    <div class="row">
-        <strong class="col-md-4 text-right">details:</strong>
-        <div class="col-md-8 text-left desc">{{issue.Description}}</div>
-    </div>
+    <!-- modal template -->
+    <div ng-include="'issues/change-status-moda.html'"></div>
 </div>
-<button type="button" class="btn btn-info">edit issue</button>

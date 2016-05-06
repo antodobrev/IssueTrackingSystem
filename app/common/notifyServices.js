@@ -31,6 +31,9 @@ angular.module('IssueTruck.notyService', [])
                             }
                         }
                     }
+                    if (serverError && serverError.Message) {
+                        errors.push(serverError.Message);
+                    }
                     if (errors.length > 0) {
                         msg = msg + ":<br>" + errors.join("<br>");
                     }
