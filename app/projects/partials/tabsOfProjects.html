@@ -15,6 +15,10 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="all">
             <div ng-include="'projects/partials/tableOfProjects.html'"></div>
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="5"
+                            class="pagination-sm" items-per-page="5" ng-change="reloadMyIssues(bigCurrentPage)"
+                            boundary-link-numbers="true" rotate="false">
+            </uib-pagination>
         </div>
         <div role="tabpanel" class="tab-pane" id="lead">
             <div ng-include="'projects/partials/tableOfProjectsAsLead.html'"></div>

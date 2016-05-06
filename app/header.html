@@ -1,0 +1,15 @@
+<div class="text-center site-title col-md-1">
+    <a id="no-padding" href="#/dashboard">
+        <img class="img-responsive" src="assets/logo.png" alt="logo">
+    </a>
+</div>
+
+<ul ng-if="user" class="nav navbar-nav navbar-left scroll">
+    <li class="active"><a href="#/dashboard">Dashboard</a></li>
+    <li>
+        <a href="#/profile" >
+            <span class="glyphicon glyphicon-user"></span>{{user}}
+        </a>
+    </li>
+    <li><a href="#/logout" ng-click="logout()" >logout</a></li>
+</ul>

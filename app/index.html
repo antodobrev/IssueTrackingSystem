@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/footer-distributed.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -23,34 +25,17 @@
     <script src="bower_components/bootstrap/js/tooltip.js"></script>
 </head>
 <body>
-<div class="row header">
-    <div class="text-center site-title col-md-1">
-        <a id="no-padding" href="#/dashboard">
-            <img class="img-responsive" src="assets/logo.png" alt="logo">
-        </a>
-    </div>
-
-    <ul ng-if="user" class="nav navbar-nav navbar-left scroll">
-        <li class="active"><a href="#/dashboard">Dashboard</a></li>
-        <li>
-            <a href="#/profile" >
-                <span class="glyphicon glyphicon-user"></span>{{user}}
-            </a>
-        </li>
-        <li><a href="#/logout" ng-click="logout()" >logout</a></li>
-    </ul>
-</div>
+<div class="row header" ng-include="'header.html'"></div>
 <div class="main-container">
-
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
         your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <div ng-view></div>
-
-    <div>issues truck app: v <span app-version></span></div>
 </div>
+
+<footer class="footer-distributed" ng-include="'footer.html'">
+</footer>
 
 
 <!-- In production use:
