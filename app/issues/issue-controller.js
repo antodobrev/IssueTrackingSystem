@@ -16,10 +16,32 @@ angular.module('IssueTruck.issues.issuePage', ['ngRoute'])
         'notifyService',
         'labelSeeder',
         'userTypeaheadLoader',
-        function ($scope, issueService, $routeParams, notifyService, labelSeeder, userTypeaheadLoader) {
+        'projectsGetter',
+        'authentication',
+        function ($scope, issueService, $routeParams, notifyService,
+                  labelSeeder, userTypeaheadLoader, projectsGetter, authentication) {
+
             issueService.getIssueById($routeParams.id).then(function (response) {
                 console.log(response.data);
                 $scope.issue = response.data;
+                // check if is lead
+                projectsGetter.getProjectById($scope.issue.Project.Id).then(function (projectData) {
+                    $scope.project = projectData.data;
+                    if ($scope.project.Lead.Id === sessionStorage.userId) {
+                        $scope.isLead = true;
+                    }
+                    // check if admin
+                    authentication.getLoggedInUser(sessionStorage.token).then(function (response) {
+                        if (response.data.isAdmin) {
+                            $scope.isAdmin = true;
+                        }
+                        if ($scope.isAdmin || $scope.isLead) {
+                            $scope.canEdit = true;
+                        }
+                    });
+
+                });
+
             });
 
             $scope.toggleEditIssue = function () {
@@ -32,17 +54,16 @@ angular.module('IssueTruck.issues.issuePage', ['ngRoute'])
             };
 
             $scope.saveIssueData = function(newIssueData) {
-                console.log(newIssueData);
                 issueService.editIssue(newIssueData).then(function (response) {
                     console.log(response.data);
                     notifyService.waveMessage("issue updated successfully", "success");
                     issueService.getIssueById($routeParams.id).then(function (response) {
-                        console.log(response.data);
                         $scope.issue = response.data;
                     });
                     $('#issue-modal').modal('toggle');
                 }, function (error) {
                     notifyService.showError('issue update error', error.data);
+                    console.log(error.data);
                 });
             };
 

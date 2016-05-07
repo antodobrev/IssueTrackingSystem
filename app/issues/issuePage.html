@@ -12,6 +12,13 @@
             </div>
         </div>
         <div class="row">
+            <strong class="col-md-4 text-right">part of project:</strong>
+            <div class="col-md-8 text-left">
+                {{issue.Project.Name}}
+                <a class="btn btn-info btn-xs" href="#/project/{{issue.Project.Id}}">view</a>
+            </div>
+        </div>
+        <div class="row">
             <strong class="col-md-4 text-right">due data:</strong>
             <div class="col-md-8 text-left">{{issue.DueDate | date: 'MMM dd yyyy'}}</div>
         </div>
@@ -37,7 +44,8 @@
         </div>
         <div class="row">
             <div class="text-right">
-                <button type="button" ng-click="toggleEditIssue()" class="btn btn-info">edit issue
+                <button type="button" ng-disabled="!canEdit"
+                        ng-click="toggleEditIssue()" class="btn btn-info">edit issue
                 </button>
             </div>
         </div>

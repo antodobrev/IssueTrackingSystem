@@ -120,7 +120,7 @@ angular.module('IssueTruck.issues', [])
                 $http.put(BASE_URL + 'issues/' + newIssueData.Id, data, config).then(function (response) {
                     defered.resolve(response);
                 }, function (err) {
-                    console.log(err);
+                    defered.reject(err);
                 });
 
                 return defered.promise;
