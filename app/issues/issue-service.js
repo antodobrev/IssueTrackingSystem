@@ -126,12 +126,31 @@ angular.module('IssueTruck.issues', [])
                 return defered.promise;
             }
 
+            function getMyIssuesByFilter(pageSize, pageNumber) {
+                var defered = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.token;
+
+                var urlTopass = BASE_URL + 'issues/me?orderBy=DueDate desc&'
+                    + 'pageSize=' + pageSize
+                    + '&pageNumber=' + pageNumber;
+
+                $http.get(urlTopass).then(function (response) {
+                    defered.resolve(response);
+                }, function (err) {
+                    console.log(err);
+                });
+
+                return defered.promise;
+            }
+
             return {
                 getMyIssues: getMyIssues,
                 addIssue: addIssue,
                 getIssueById: getIssueById,
                 editStatus: editStatus,
-                editIssue: editIssue
+                editIssue: editIssue,
+                getMyIssuesByFilter: getMyIssuesByFilter
             }
         }
     ]);
