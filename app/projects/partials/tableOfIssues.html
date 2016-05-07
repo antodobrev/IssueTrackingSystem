@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="clickable" ng-click="goToIssuePage(issue)" ng-repeat="issue in Issues">
+    <tr class="clickable" ng-click="goToIssuePage(issue)" ng-repeat="issue in Issues | orderBy:'-DueDate'">
         <td>{{issue.Title}}</td>
         <td>{{issue.Description}}</td>
         <td>{{issue.DueDate | date: 'MMM dd yyyy'}}</td>
@@ -16,3 +16,7 @@
     </tr>
     </tbody>
 </table>
+<uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="5"
+                class="pagination-sm" items-per-page="5" ng-change="reloadMyIssues(bigCurrentPage)"
+                boundary-link-numbers="true" rotate="false">
+</uib-pagination>

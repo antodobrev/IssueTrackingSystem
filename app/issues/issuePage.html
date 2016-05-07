@@ -37,7 +37,8 @@
         </div>
         <div class="row">
             <div class="text-right">
-                <a href="#/issue/{{issue.Id}}/edit" type="button" class="btn btn-info">edit issue</a>
+                <button type="button" ng-click="toggleEditIssue()" class="btn btn-info">edit issue
+                </button>
             </div>
         </div>
     </div>
@@ -63,4 +64,7 @@
     </div>
     <!-- modal template -->
     <div ng-include="'issues/change-status-moda.html'"></div>
+    <!-- modal add issue -->
+    <div ng-include="'issues/add-issue.html'"></div>
+
 </div>

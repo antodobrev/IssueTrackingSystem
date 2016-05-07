@@ -53,11 +53,6 @@ header img {
   margin: 10px 0;
 }
 
-#ui-datepicker-div {
-  background-color: #eee;
-  padding: 0 20px;
-}
-
 input::-webkit-calendar-picker-indicator{
   display: none;
 }

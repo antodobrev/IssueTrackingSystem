@@ -47,7 +47,7 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                 }
             });
 
-            $scope.addIssue = function(newIssueData) {
+            $scope.saveIssueData = function(newIssueData) {
                 newIssueData.ProjectId = $scope.project.Id;
                 issueService.addIssue(newIssueData).then(function (response) {
                     console.log(response.data);
@@ -55,14 +55,17 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                     projectsGetter.getProjectIssues($scope.project.Id).then(function (issues) {
                         $scope.Issues = issues.data;
                     });
-                    $('#add-issue-modal').modal('toggle');
+                    $('#issue-modal').modal('toggle');
                 }, function (error) {
                     notifyService.showError(error.data);
                 });
             };
 
             $scope.toggleModal = function () {
-                $('#add-issue-modal').modal('toggle');
+                $('#issue-modal').modal('toggle');
+                $scope.issue = {};
+                $scope.issue.Priorities = $scope.project.Priorities;
+                $scope.modalHeader = 'add new issue';
                 labelSeeder.seedLabels($scope);
                 userTypeaheadLoader.seedLoader($scope);
             }

@@ -13,7 +13,8 @@ angular.module('IssueTruck.dashboard', ['ngRoute'])
         '$scope',
         'issueService',
         'projectsGetter',
-        function ($scope, issueService, projectsGetter) {
+        '$location',
+        function ($scope, issueService, projectsGetter, $location) {
 
             var leaderId = sessionStorage.userId;
             console.log(leaderId);
@@ -21,6 +22,10 @@ angular.module('IssueTruck.dashboard', ['ngRoute'])
                 $scope.projectsAsLead = response.data.Projects;
                 console.log($scope.projectsAsLead);
             });
+
+            $scope.goToIssuePage = function (issue) {
+                $location.path('issue/' + issue.Id);
+            };
 
             issueService.getMyIssues().then(function (issues) {
                 console.log(issues.data.Issues);
