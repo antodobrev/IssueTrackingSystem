@@ -70,7 +70,12 @@ angular.module('IssueTruck.issues.issuePage', ['ngRoute'])
             // change status
 
             $scope.toggleStatusModal = function () {
-                $('#change-status-modal').modal('toggle');
+                if (sessionStorage.userId === $scope.issue.Assignee.Id) {
+                    $('#change-status-modal').modal('toggle');
+                }
+                else {
+                    notifyService.waveMessage("Only assignees can change the status", 'info')
+                }
             };
 
             $scope.updateStatus = function (newStatusId) {

@@ -25,20 +25,6 @@ angular.module('IssueTruck.dashboard', ['ngRoute'])
                 $location.path('issue/' + issue.Id);
             };
 
-/*            issueService.getMyIssues().then(function (issues) {
-                console.log(issues.data.Issues);
-                $scope.Issues = issues.data.Issues;
-                var assignedIssues = [];
-                $scope.Issues.forEach(function (issue) {
-                    projectsGetter.getProjectById(issue.Project.Id)
-                        .then(function (response) {
-                            $scope.projects.push(response.data);
-                        })
-                });
-                $scope.projects = assignedIssues;
-                console.log($scope.assignedIssues);
-            });*/
-
             issueService.getMyIssuesByFilter(1, 1).then(function (response) {
                 $scope.bigTotalItems = response.data.TotalCount;
                 issueService.getMyIssuesByFilter(response.data.TotalCount, 1).then(function (allIssues) {
@@ -60,7 +46,7 @@ angular.module('IssueTruck.dashboard', ['ngRoute'])
 
             $scope.reloadMyProjects = function(bigCurrentPage) {
                 $scope.projectsTotalCount = Object.keys($scope.relatedProjects).length;
-                console.log($scope.relatedProjects);
+                //console.log($scope.relatedProjects);
                 var asArr = [];
                 //debugger;
                 for (var pr in $scope.relatedProjects) {

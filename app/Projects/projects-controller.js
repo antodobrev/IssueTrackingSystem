@@ -88,8 +88,6 @@ angular.module('IssueTruck.projects', ['ngRoute', 'IssueTruck.projects.getter'])
                 };
             });*/
 
-
-            
             $scope.reloadProjects = function (bigCurrentPage) {
                 console.log(bigCurrentPage);
                 projectsGetter.getProjectsByFilter(5, bigCurrentPage).then(function (response) {
